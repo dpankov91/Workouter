@@ -2,9 +2,10 @@ pipeline {
     agent any
     stages {
  stage('Initialize'){
+	steps{
         def dockerHome = tool 'myDocker'
         env.PATH = "${dockerHome}/bin:${env.PATH}"
-    }
+    }}
         stage("Build application") {
             steps {
                 sh "dotnet build src/Workouter.sln"
