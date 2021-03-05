@@ -4,16 +4,16 @@ services:
   mssql-db:
     image: mcr.microsoft.com/mssql/server
     ports:
-      - 62000:1433
+      - 9999:1433
     environment: 
       ACCEPT_EULA: Y
       SA_PASSWORD: "HelloW0rld"
   
   application:
-    image: boulundeasv/workouter
+    image: dpankov91/workouter
     environment: 
       ASPNETCORE_ENVIRONMENT: Development
     depends_on: 
       - mssql-db
     ports: 
-      - 61000:80
+      - 1111:80
