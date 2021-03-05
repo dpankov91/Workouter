@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sh "dotnet build src/Workouter.sln"
                 sh "docker build . -t dpankv91/workouter"
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DockerHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DockerHubb', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
                 {
                     sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
                 }
