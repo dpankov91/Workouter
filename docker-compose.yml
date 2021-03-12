@@ -7,8 +7,9 @@ services:
       ports:
         - 9999:1433
       environment: 
-        ACCEPT_EULA: Y
-        SA_PASSWORD: "HelloW0rld"
+        ACCEPT_EULA: "Y"
+        SA_PASSWORD: HelloW0rld
+        MSSQL_DB: Workouter
   
     application:
       image: dpankov91/workout
