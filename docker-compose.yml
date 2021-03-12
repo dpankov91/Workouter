@@ -1,19 +1,29 @@
 version: "3.3"
 
 services:
-  mssql-db:
-    image: mcr.microsoft.com/mssql/server
-    ports:
-      - 9999:1433
-    environment: 
-      ACCEPT_EULA: Y
-      SA_PASSWORD: "HelloW0rld"
+    mssql-db:
+      build: ./db/docker
+      #image: mcr.microsoft.com/mssql/server
+      ports:
+        - 9999:1433
+      environment: 
+        ACCEPT_EULA: Y
+        SA_PASSWORD: "HelloW0rld"
   
-  application:
-    image: dpankov91/workouter
-    environment: 
-      ASPNETCORE_ENVIRONMENT: Development
-    depends_on: 
-      - mssql-db
-    ports: 
-      - 1111:80
+    application:
+      image: dpankov91/workout
+      environment: 
+        ASPNETCORE_ENVIRONMENT: Development
+      depends_on: 
+        - mssql-db
+      ports: 
+        - 1111:80
+
+    flyway:
+      image: flyway/flyway
+      command: migrate
+      volumes:
+        - ./db:/flyway/sql
+        - ./db:/flyway/conf
+      depends_on:
+        - mssql-db
